@@ -1,0 +1,27 @@
+{
+
+  "manifest_version": 2,
+  "name": "oknext",
+  "version": "1.0",
+
+  "description": "Remotely go to next song on some streaming websites (currently YouTube and Spotify)",
+
+  "icons": {
+    "48": "icons/oknext-48.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://www.youtube.com/watch*", "http://localhost/*", "*://*.spotify.com/*"],
+      "js": ["oknext.js"]
+    }
+  ],
+  "permissions": [
+	    "storage"
+  ],
+  "options_ui": {
+      	  "page": "options.html",
+    	  "browser_style": true
+  }
+
+}
