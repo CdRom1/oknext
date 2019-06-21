@@ -2,7 +2,7 @@ var host = "";
 browser.storage.local.get("hostSetting").then( (o) => {try {host = o["hostSetting"]["host"];} catch{ 
 	host = "172.25.100.100:443";
 	hostSetting = {host: host};
-	browser.storage.local.set({hostSetting})i;
+	browser.storage.local.set({hostSetting});
 }});
 function ytnext() {
 	document.getElementsByClassName("ytp-next-button ytp-button")[0].click();
