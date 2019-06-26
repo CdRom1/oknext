@@ -1,3 +1,4 @@
+
 hostField = document.getElementById("host");
 renderHost();
 document.getElementById("optionSubmit").addEventListener("click", () => savePreferences());
@@ -5,7 +6,7 @@ document.getElementById("optionSubmit").addEventListener("click", () => savePref
 function renderHost() {
 	getHost().then( (o) => {
 		if(typeof o.host !== 'undefined') {hostField.value = o.host;}
-		else {setHost("172.25.100.100:443");}
+		else {setHost("172.25.100.100:443"); renderHost();}
 	});
 }
 
@@ -13,8 +14,7 @@ function savePreferences() {
 	setHost(hostField.value);
 }
 function setHost(hoststr) {
-	extApi().storage.local.set({host: hoststr});
-	renderHost();
+	return(extApi().storage.local.set({host: hoststr}));
 }
 
 function getHost() {
@@ -36,3 +36,4 @@ function extApi() {
 		return chrome;
 	}
 }
+
