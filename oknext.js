@@ -1,17 +1,22 @@
 var host = "";
-browser.storage.local.get("hostSetting").then( (o) => {try {host = o["hostSetting"]["host"];} catch{ 
+browser.storage.local.get("hostSetting").then( (o) => {
+try {host = o["hostSetting"]["host"];} catch{ 
 	host = "172.25.100.100:443";
 	hostSetting = {host: host};
 	browser.storage.local.set({hostSetting});
-}});
+}
+startWs();
+});
 function ytnext() {
 	document.getElementsByClassName("ytp-next-button ytp-button")[0].click();
 }
 function spotinext() {
 	document.getElementsByClassName("control-button spoticon-skip-forward-16")[0].click();
 }
+function startWs() {
 //start ws
 console.log("starting ws");
+console.log("host: " + host);
 var ws = new WebSocket("wss://" + host);
 ws.onopen = function (event) {
 	  ws.send("oknext browser ready !"); 
@@ -21,6 +26,7 @@ ws.onmessage = function (event) {
 		picknext();
 	}
 	console.log(event);
+}
 }
 
 function picknext() {
